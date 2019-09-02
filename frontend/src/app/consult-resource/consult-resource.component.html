@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row text-center">
+        <div class="col-md-3">
+            <div class="md-form">
+                <input mdbInput placeholder="Ex: c7c9cb62-5e5d-447c-9b21-5a19bf573907" type="text"
+                    name="codigoTransacao" [(ngModel)]="apiCall.codigoTransacao" class="form-control">
+                <label for="form58">Codigo transação</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="md-form">
+                <mdb-select [options]="collections" [highlightFirst]="false" placeholder="Escolher coleção"
+                    name="collections" [(ngModel)]="apiCall.collection">
+                </mdb-select>
+                <label>Coleção</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="md-form">
+                <mdb-select [options]="methods" [highlightFirst]="false" placeholder="Escolher método" name="methods"
+                    [(ngModel)]="apiCall.method">
+                </mdb-select>
+                <label>Método do Recurso</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="md-form">
+                <button type="button" mdbBtn color="primary" mdbWavesEffect
+                    (click)="consultResourceLog()">Buscar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="json-printer" *ngIf="data.length !== 0">
+            <pre>{{ data | json }}</pre>
+        </div>
+    </div>
+</div>
