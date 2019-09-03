@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from '../core/app-routing.module'
 import { MDBSpinningPreloader, MDBBootstrapModulesPro, ToastModule } from 'ng-uikit-pro-standard';
 import { ConsultResourceComponent } from './consult-resource/consult-resource.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConsultResourceComponent
+    ConsultResourceComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

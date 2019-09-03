@@ -10,8 +10,12 @@ export class CommonServicesService {
 
     readonly url = 'http://localhost:8000/commonservices';
 
-    get(method: string, codigoTransacao: string, collection: string) {
+    findByCodTransacao(method: string, codigoTransacao: string, collection: string) {
         return this.HttpClient.get(`${this.url}?method=${method}&codigoTransacao=${codigoTransacao}&collection=${collection}`);
+    }
+
+    findAllLogsToday(operation: string) {
+        return this.HttpClient.get(`${this.url}/log/today?operation=${operation}`);
     }
 
 }

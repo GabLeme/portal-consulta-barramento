@@ -22,6 +22,7 @@ export class ConsultResourceComponent implements OnInit {
     collection: '',
     method: ''
   }
+  countClicks: number = 0;
   data: any = [];
 
 
@@ -39,9 +40,11 @@ export class ConsultResourceComponent implements OnInit {
   }
 
   consultResourceLog(): void {
-    this.CommonServicesService.get(this.apiCall.method, this.apiCall.codigoTransacao, this.apiCall.collection).subscribe((r) => {
+    this.CommonServicesService.findByCodTransacao(this.apiCall.method, this.apiCall.codigoTransacao, this.apiCall.collection).subscribe((r) => {
       this.data = r;
+      this.countClicks++;
     }, (err) => {
+      this.countClicks++;
       this.data = err;
     })
   }
