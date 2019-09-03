@@ -1,0 +1,120 @@
+<div class="container">
+    <div class="row text-center">
+        <div class="col-md-3">
+            <h5>Barramento: <span [ngClass]="{
+                'text-success': statusBarramento === 'ON',
+                'text-danger': statusBarramento === 'OFF'
+            }">{{statusBarramento}}</span></h5>
+        </div>
+        <div class="col-md-3"> <button (click)="testBus()">Testar barramento</button> </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-md-4">
+            <mdb-card cascade="true">
+                <span>Atendimento</span>
+                <hr>
+                <mdb-card-body cascade="true" class="text-center">
+                    <mdb-card-text>
+                        {{totalApiCliente}} chamadas.
+                        <p>{{mediaApiCliente}} média / 10 segundos</p>
+                    </mdb-card-text>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+        <div class="col-md-4">
+            <mdb-card cascade="true">
+                <span>Parceiro</span>
+                <hr>
+                <mdb-card-body cascade="true" class="text-center">
+                    <mdb-card-text>
+                        {{totalApiParceiro}} chamadas.
+                        <p>{{mediaApiParceiro}} média / 10 segundos</p>
+                    </mdb-card-text>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+        <div class="col-md-4">
+            <mdb-card cascade="true">
+                <span>CRM</span>
+                <hr>
+                <mdb-card-body cascade="true" class="text-center">
+                    <mdb-card-text>
+                        {{totalApiCrm}} chamadas.
+                        <p>{{mediaApiCrm}} média / 10 segundos</p>
+                    </mdb-card-text>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+    </div>
+    <div class="row text-center" style="margin-top: 25px">
+        <div class="col-md-4">
+            <mdb-card cascade="true">
+                <span>Oscilação</span>
+                <hr>
+                <mdb-card-body cascade="true" class="text-center">
+                    <mdb-card-text>
+                        {{totalApiOscilacao}} chamadas.
+                    </mdb-card-text>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+        <div class="col-md-4">
+            <mdb-card cascade="true">
+                <span>Nota informativa</span>
+                <hr>
+                <mdb-card-body cascade="true" class="text-center">
+                    <mdb-card-text>
+                        {{totalApiNotaInformativa}} chamadas.
+                    </mdb-card-text>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+        <div class="col-md-4">
+            <mdb-card cascade="true">
+                <span>Falta de energia completa</span>
+                <hr>
+                <mdb-card-body cascade="true" class="text-center">
+                    <mdb-card-text>
+                        {{totalApiEnergiaCompleta}} chamadas.
+                    </mdb-card-text>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+    </div>
+    <div class="row text-center" style="margin-top: 25px">
+        <div class="col-md-4">
+            <mdb-card cascade="true">
+                <span>Segunda Via</span>
+                <hr>
+                <mdb-card-body cascade="true" class="text-center">
+                    <mdb-card-text>
+                        {{totalApiSegundaVia}} chamadas.
+                    </mdb-card-text>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+        <div class="col-md-4">
+            <mdb-card cascade="true">
+                <span>Religa Comum</span>
+                <hr>
+                <mdb-card-body cascade="true" class="text-center">
+                    <mdb-card-text>
+                        {{totalApiReligaComum}} chamadas.
+                    </mdb-card-text>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+        <div class="col-md-4">
+            <mdb-card cascade="true">
+                <span>Religa Urgente</span>
+                <hr>
+                <mdb-card-body cascade="true" class="text-center">
+                    <mdb-card-text>
+                        {{totalApiReligaUrgente}} chamadas.
+                    </mdb-card-text>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+    </div>
+</div>

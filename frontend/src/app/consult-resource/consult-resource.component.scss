@@ -1,0 +1,41 @@
+.json-printer {
+    background: #eee;
+    height: 400px;
+    overflow: scroll;
+}
+
+$dark-blue: #2F3366;
+$pink: #E2197D;
+$light-blue: #15A4DF;
+$purple: #652684;
+$background-alt: #E8F5FB;
+$error-red: #aa1a0d;
+$failure-grey: #3C3741;
+
+
+.error-message {
+  position: relative;
+  background:white;
+  min-height:75px;
+  max-width:330px;
+  border-radius:.5rem;
+  padding:1rem;
+  box-sizing:border-box;
+  animation: fadein .7s;
+}
+
+.error-message-text {
+  display:inline-block;
+  font-family:"Open Sans",Arial,Verdana,sans-serif;
+  margin-left: 3rem;
+  font-size: 1rem;
+}
+
+.error-indicator {
+  width:32px;
+  height:32px;
+  display:inline-block;
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

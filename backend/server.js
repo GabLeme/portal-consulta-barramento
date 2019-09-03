@@ -4,6 +4,7 @@ const port = 8000 || process.env.PORT;
 const app = express();
 const dbConfig = require("./config/database.config");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 mongoose.Promise = global.Promise;
 
@@ -18,6 +19,9 @@ mongoose.connect(dbConfig.dev, { useNewUrlParser: true })
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors({
+    origin: '*'
+}));
 
 require('./routes/commonservices.route')(app);
 
