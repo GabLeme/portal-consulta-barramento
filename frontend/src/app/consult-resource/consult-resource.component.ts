@@ -31,7 +31,8 @@ export class ConsultResourceComponent implements OnInit {
   ngOnInit() {
     this.collections = [
       { value: 'log', label: 'Log' },
-      { value: 'fallure', label: 'Failure' },
+      { value: 'failure', label: 'Failure' },
+      { value: 'error', label: 'Error' },
     ]
     this.methods = [
       { value: 'POST', label: 'Saída' },

@@ -1,5 +1,6 @@
-const Log = require("../models/log.model");
-const Failure = require("../models/failure.model");
+const LogModel = require("../models/log.model");
+const FailureModel = require("../models/failure.model");
+const ErrorModel = require("../models/error.model");
 const moment = require("moment");
 exports.findByCodigoTransacao = (req, res) => {
 
@@ -9,8 +10,12 @@ exports.findByCodigoTransacao = (req, res) => {
     const codigoTransacao = req.query.codigoTransacao;
     const apiMethod = req.query.method.toUpperCase();
     const collection = req.query.collection.toUpperCase();
-
-    let Model = collection === 'LOG' ? Log : Failure;
+    
+    let Model = (
+        collection === 'LOG' ? LogModel :
+        collection === 'ERROR' ? ErrorModel :
+        FailureModel
+    );
 
     switch (apiMethod) {
         case 'GET':
@@ -20,6 +25,7 @@ exports.findByCodigoTransacao = (req, res) => {
             })
             break;
         case 'POST':
+            console.log("model", Model.modelName)
             Model.find({ "data.codigoTransacao": codigoTransacao }, (err, log) => {
                 if (err) res.status(500).send({ message: 'Nao foi possivel realizar a requisicao' })
                 else res.send(log);
@@ -39,7 +45,7 @@ exports.findAllLogsToday = (req, res) => {
     let today = moment().startOf('day').toISOString();
     let endOfToday = today.split('T')[0] + "T23:59:59.999";
     
-    Log.find({ "log.dateTime": { "$gte": today, "$lte": endOfToday }, "serviceTrace.Operation": operation }, (err, logs) => {
+    LogModel.find({ "log.dateTime": { "$gte": today, "$lte": endOfToday }, "serviceTrace.Operation": operation }, (err, logs) => {
         if(err) res.status(500).send({ message: "Nao foi possivel realizar a requisicao"})
         else res.send([{ totalMensagens: logs.length}])    
     })
