@@ -10,11 +10,11 @@ exports.findByCodigoTransacao = (req, res) => {
     const codigoTransacao = req.query.codigoTransacao;
     const apiMethod = req.query.method.toUpperCase();
     const collection = req.query.collection.toUpperCase();
-    
+
     let Model = (
         collection === 'LOG' ? LogModel :
-        collection === 'ERROR' ? ErrorModel :
-        FailureModel
+            collection === 'ERROR' ? ErrorModel :
+                FailureModel
     );
 
     switch (apiMethod) {
@@ -25,8 +25,8 @@ exports.findByCodigoTransacao = (req, res) => {
             })
             break;
         case 'POST':
-            console.log("model", Model.modelName)
             Model.find({ "data.codigoTransacao": codigoTransacao }, (err, log) => {
+                console.log(log)
                 if (err) res.status(500).send({ message: 'Nao foi possivel realizar a requisicao' })
                 else res.send(log);
             })
@@ -37,16 +37,29 @@ exports.findByCodigoTransacao = (req, res) => {
 
 exports.findAllLogsToday = (req, res) => {
 
-    if (req.query.operation == null)
+    if (req.query.operation == null /*|| req.query.empresaOperadora == null*/)
         return res.status(500).send({ message: "Parametros incompletos " });
 
     const operation = req.query.operation;
-    
+    const empresaOperadora = req.query.empresaOperadora;
+
     let today = moment().startOf('day').toISOString();
     let endOfToday = today.split('T')[0] + "T23:59:59.999";
-    
-    LogModel.find({ "log.dateTime": { "$gte": today, "$lte": endOfToday }, "serviceTrace.Operation": operation }, (err, logs) => {
-        if(err) res.status(500).send({ message: "Nao foi possivel realizar a requisicao"})
-        else res.send([{ totalMensagens: logs.length}])    
+    let operadora = (
+        empresaOperadora === '98' ? 'cemar' : 'celpa'
+    );
+
+    // if (operation == 'postWebhook') {
+    //     LogModel.find({ "log.dateTime": { "$gte": today, "$lte": endOfToday }, "serviceTrace.Operation": operation, "serviceTrace.Parameters.operadora": operadora }, (err, logs) => {
+    //         if (err) res.status(500).send({ message: "Nao foi possivel realizar a requisicao" })
+    //         else res.send([{ totalMensagens: logs.length }])
+    //     })
+    // }
+    // else {
+    LogModel.find({ "log.dateTime": { "$gte": today, "$lte": endOfToday }, "serviceTrace.Operation": operation /*, "serviceTrace.Parameters.empresaOperadora": empresaOperadora */}, (err, logs) => {
+        if (err) res.status(500).send({ message: "Nao foi possivel realizar a requisicao" })
+        else res.send([{ totalMensagens: logs.length }])
     })
 }
+
+

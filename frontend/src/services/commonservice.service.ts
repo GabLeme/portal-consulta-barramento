@@ -14,7 +14,7 @@ export class CommonServicesService {
         return this.HttpClient.get(`${this.url}?method=${method}&codigoTransacao=${codigoTransacao}&collection=${collection}`);
     }
 
-    findAllLogsToday(operation: string) {
+    findAllLogsToday(operation: string, empresaOperadora?: string) {
         return this.HttpClient.get(`${this.url}/log/today?operation=${operation}`);
     }
 

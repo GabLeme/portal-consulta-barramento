@@ -20,30 +20,35 @@ export class DashboardComponent implements OnInit {
   totalApiReligaComum: number = 0;
   totalApiReligaUrgente: number = 0;
   statusBarramento: string = '';
-
+  empresas: Array<any>;
+  empresaOperadora: string = '';
   today: Date = new Date();
   constructor(private CommonServicesService: CommonServicesService) { }
 
   ngOnInit() {
+    this.empresas = [
+      { value: '98', Label: 'Cemar' },
+      { value: '95', label: 'Celpa' }
+    ]
     setInterval(() => {
       this.testBus();
 
-      this.CommonServicesService.findAllLogsToday("getClientes").subscribe((r) => {
-        let anterior = this.totalApiCliente;
-        this.totalApiCliente = r[0].totalMensagens;
-        this.mediaApiCliente = this.totalApiCliente - anterior;
+      // this.CommonServicesService.findAllLogsToday("getClientes").subscribe((r) => {
+      //   let anterior = this.totalApiCliente;
+      //   this.totalApiCliente = r[0].totalMensagens;
+      //   this.mediaApiCliente = this.totalApiCliente - anterior;
 
-      })
-      this.CommonServicesService.findAllLogsToday("postWebhook").subscribe((r) => {
-        let anterior = this.totalApiParceiro;
-        this.totalApiParceiro = r[0].totalMensagens;
-        this.mediaApiParceiro = this.totalApiParceiro - anterior;
-      })
-      this.CommonServicesService.findAllLogsToday("getContatos").subscribe((r) => {
-        let anterior = this.totalApiCrm;
-        this.totalApiCrm = r[0].totalMensagens;
-        this.mediaApiCrm = this.totalApiCrm - anterior;
-      })
+      // })
+      // this.CommonServicesService.findAllLogsToday("postWebhook").subscribe((r) => {
+      //   let anterior = this.totalApiParceiro;
+      //   this.totalApiParceiro = r[0].totalMensagens;
+      //   this.mediaApiParceiro = this.totalApiParceiro - anterior;
+      // })
+      // this.CommonServicesService.findAllLogsToday("getContatos").subscribe((r) => {
+      //   let anterior = this.totalApiCrm;
+      //   this.totalApiCrm = r[0].totalMensagens;
+      //   this.mediaApiCrm = this.totalApiCrm - anterior;
+      // })
       this.CommonServicesService.findAllLogsToday("postFaltaEnergiaCompleta").subscribe((r) => {
         this.totalApiEnergiaCompleta = r[0].totalMensagens;
       })
